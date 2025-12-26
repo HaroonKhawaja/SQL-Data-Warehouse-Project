@@ -1,0 +1,101 @@
+- ETL component: extract data from source, transform it, and load it into a data warehouse
+- Integrates all sources into one place
+
+ETL 
+- Data exists in source system
+- We need to load into target system
+
+1. Extract data from source
+2. Transform the data (normalization, shape) into the format we need for analysis, etc.
+3. Load the transformed data into a target
+
+Extraction:
+    1. Methods
+        a. Pull Extraction: pulling data from source
+        b. Push Extraction: source pushes data to data warehouse
+
+    2. Types:
+        a. Full Extraction: Load all the data to the data warehouse
+        b. Incremental Extraction: Load only the new data
+
+    3. Techniques:
+        a. Manual
+        b. Database Querying
+        c. File Parsing
+        d. Through API Calls
+        e. Event-Based Streaming
+        f. Change-Data-Capture (CDC)
+        g. Web Scraping
+
+Transformation:
+    1. Data Enrichment
+    2. Data Integration
+    3. Derived Columns
+    4. Data Normalization and Standardization
+    5. Business Rules & Logic
+    6. Data Aggregation
+    7. Data Cleaning
+
+
+Load:
+    1. Processing Types
+        a. Batch Processing
+        b. Stream Processing
+
+    2. Load Methods:
+        a. Full Load: Truncate & Insert, Upsert, or Drop, Create, & Insert
+        b. Incremental Load: Upsert, Append, or Merge
+
+    3. Slowly Changing Dimensions (SCD):
+        a. SCD 0: No Historization
+        b. SCD 1: Overwrite (updating old records)
+        c. SCD 2: Historization (inserting new records)
+
+Project Details:
+    1. Pull Extraction
+    2. Full Extraction
+    3. File Parsing
+    4. All Transformations
+    5. Batch Processing
+    6. Full Load
+    7. SCD 1
+
+Different Approaches to Design a Data Warehouse:
+    1. Inmon Approach: Stage -> EDW (3NF) -> Data Marts -> Analysis
+    2. Kimball Approah: Stage -> Data Marks -> Analysis
+    3. Data Vault: Stage -> Raw Vault -> Business Vault -> Data Marts -> Analysis 
+    4. Medallion Architecture: Bronze -> Silver -> Gold -> Analysis
+
+
+Medallion Architecture:
+    1. Bronze Layer:
+        a. Raw, unprocessed data as-is from sources; untouched data
+        b. For traceability and Debugging
+        c. Tables
+        d. Full Load (Truncate & Insert)
+        e. No data transformation
+        d. No data modelling (normalizations, etc.)
+        e. For data engineers
+    
+    2. Silver Layer:
+        a. Place to sore clean and standardized data
+        b. Preparing data for analysis
+        c. Tables
+        d. Full Load (Truncate & Insert)
+        e. Data cleansing, standardization, normalization, enrichment
+        d. No data modelling (normalizations, etc.)
+        e. For data engineers/analysts
+
+
+    3. Gold Layer:
+        a. Business-ready data.
+        b. Provides data to be consumed for reporting and analysis
+        c. Views
+        d. None
+        e. Data integeration, aggregation for business logic and rules.
+        d. We use schemas (star schema), aggregate objects, and/or flat Tables
+        e. For data analysts/business designers
+
+Seperation of Concerns (SOC):
+    1. Seperate the complex system into simpler, smaller parts
+    2. No duplication of tasks among seperate parts 
